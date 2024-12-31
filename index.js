@@ -3,7 +3,7 @@ import fs from 'fs'
 import { readFileSync } from "fs"
 import { config } from "dotenv";
 import path from 'path'
-config()
+config();
 const app = express()
 app.use(express.json())
 const baseUrl = process.env.BASE_URL ?? "http://localhost";
@@ -24,29 +24,21 @@ app.get('/api/users',(req,res)=>{
 	  return res.json(users)
 })
 
-app.post('/api.users',(req,res)=>{
-	const {nome}= req.body
-	app.post('/api/users', (req, res) => {
-	    const { nome } = req.body;
-	
-	    if (!nome) {
-	        return res.status(400).json({ error: "O campo 'nome' é obrigatório." });
-	    }
-	
-	    // Cria um novo usuário com um ID único
-	    const novoUsuario = { id: users.length + 1, nome };
-	
-	    // Adiciona o novo usuário à lista
-	    users.push(novoUsuario);
-	
-	    // Atualiza o arquivo db.json
-	    dbJson.users = users;
-	    fs.writeFileSync(caminho, JSON.stringify(dbJson, null, 2));
-	
-	    return res.status(201).json(novoUsuario);
-	});
-	
-})
+app.post('/api/users', (req, res) => {
+	const { nome } = req.body;
+
+	if (!nome) {
+			return res.status(400).json({ error: "O campo 'nome' é obrigatório." });
+	}
+
+	const novoUsuario = { id: users.length + 1, nome };
+	users.push(novoUsuario);
+	dbJson.users = users;
+
+	fs.writeFileSync(caminho, JSON.stringify(dbJson, null, 2));
+	return res.status(201).json(novoUsuario);
+});
+
 app.listen(port,()=>{
 	console.log(`servidor rodando ${baseUrl}:${port}\n `)
  console.log(dbJson)
