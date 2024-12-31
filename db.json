@@ -1,28 +1,5 @@
 {
   "users": [
-    {
-      "id": 1,
-      "nome": "Alice",
-      "email": "alice@gmail.com",
-      "telefone": "419888888"
-    },
-    {
-      "id": 2,
-      "nome": "Bob",
-      "email": "bob@gmail.com",
-      "telefone": "419555555"
-    },
-    {
-      "id": 3,
-      "nome": "Lucineia Silva",
-      "email": "luh@gmail.com",
-      "telefone": "41988866"
-    },
-    {
-      "id": 4,
-      "nome": "Lucineia Silva",
-      "email": "luh@gmail.com",
-      "telefone": "414444444"
-    }
+    
   ]
 }

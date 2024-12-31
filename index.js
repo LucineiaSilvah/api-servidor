@@ -1,5 +1,6 @@
 import express from 'express'
 import fs from 'fs'
+import {randomUUID} from 'crypto'
 import { readFileSync } from "fs"
 import { config } from "dotenv";
 import path from 'path'
@@ -37,7 +38,7 @@ app.post('/api/users', (req, res) => {
 			return res.status(400).json({ error: "O campo 'telefone' é obrigatório." });
 	}
 
-	const novoUsuario = { id: users.length + 1, nome,email,telefone };
+	const novoUsuario = { id: randomUUID(), nome,email,telefone };
 	users.push(novoUsuario);
 	dbJson.users = users;
 
