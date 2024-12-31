@@ -41,7 +41,7 @@ app.post('/api/users', (req, res) => {
 
 app.listen(port,()=>{
 	console.log(`servidor rodando ${baseUrl}:${port}\n `)
- console.log(dbJson)
+
   
 	
 })
