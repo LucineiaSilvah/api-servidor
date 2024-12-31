@@ -25,13 +25,19 @@ app.get('/api/users',(req,res)=>{
 })
 
 app.post('/api/users', (req, res) => {
-	const { nome } = req.body;
+	const { nome,email,telefone } = req.body;
 
 	if (!nome) {
 			return res.status(400).json({ error: "O campo 'nome' é obrigatório." });
 	}
+	if (!email) {
+			return res.status(400).json({ error: "O campo 'email' é obrigatório." });
+	}
+	if (!telefone) {
+			return res.status(400).json({ error: "O campo 'telefone' é obrigatório." });
+	}
 
-	const novoUsuario = { id: users.length + 1, nome };
+	const novoUsuario = { id: users.length + 1, nome,email,telefone };
 	users.push(novoUsuario);
 	dbJson.users = users;
 
