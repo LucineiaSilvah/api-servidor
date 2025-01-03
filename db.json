@@ -1,3 +1,10 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "4206697e-13eb-41ab-a465-62aa3f03ad44",
+      "nome": "Novo Nome",
+      "email": "novoemail@example.com",
+      "telefone": "999999999"
+    }
+  ]
 }

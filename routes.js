@@ -38,6 +38,36 @@ router.post("/api/users", (req, res) => {
   fs.writeFileSync(caminho, JSON.stringify(dbJson, null, 2));
   return res.status(201).json(novoUsuario);
 });
+router.put("/api/users/:id", (req, res) => {
+  const {id} = req.params // pega o di da url
+  const { nome, email, telefone } = req.body; // pega os dados do corpo
+
+  if (!nome) {
+    return res.status(400).json({ error: "O campo 'nome' é obrigatório." });
+  }
+  if (!email) {
+    return res.status(400).json({ error: "O campo 'email' é obrigatório." });
+  }
+  if (!telefone) {
+    return res.status(400).json({ error: "O campo 'telefone' é obrigatório." });
+  }
+
+   // Localiza o usuário pelo ID
+   const usuarioIndex = users.findIndex((user) => user.id === id);
+   if (usuarioIndex === -1) {
+     return res.status(404).json({ error: "Usuário não encontrado." });
+   }
+ 
+   // Atualiza os dados do usuário
+   users[usuarioIndex] = { id, nome, email, telefone };
+ 
+   // Atualiza o banco de dados
+   dbJson.users = users;
+   fs.writeFileSync(caminho, JSON.stringify(dbJson, null, 2));
+ 
+   // Retorna o usuário atualizado
+   return res.status(200).json(users[usuarioIndex]);
+});
 
 router.delete("/api/users/:id", (req, res) => {
   const { id } = req.params;
