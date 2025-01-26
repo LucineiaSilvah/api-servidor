@@ -1,10 +1,31 @@
 {
   "users": [
+   
+  ],
+  "products": [
     {
       "id": "4206697e-13eb-41ab-a465-62aa3f03ad44",
-      "nome": "Novo Nome",
-      "email": "novoemail@example.com",
-      "telefone": "999999999"
+      "name": "Bolo de Chocolate",
+      "description": "Delicioso bolo de chocolate com cobertura cremosa",
+      "image": "https://example.com/images/bolo-chocolate.jpg"
+    },
+    {
+      "id": "5a3b2c1d-67ef-89ab-12cd-34ef56gh78ij",
+      "name": "Torta de Morango",
+      "description": "Torta recheada com morangos frescos e creme",
+      "image": "https://example.com/images/torta-morango.jpg"
+    },
+    {
+      "id": "9k8l7m6n-54op-32qr-10st-98uv76wx54yz",
+      "name": "Pudim de Leite",
+      "description": "Pudim cremoso de leite condensado com calda de caramelo",
+      "image": "https://example.com/images/pudim-leite.jpg"
+    },
+    {
+      "id": "1a2b3c4d-56ef-78gh-90ij-12kl34mn56op",
+      "name": "Cheesecake",
+      "description": "Cheesecake com cobertura de frutas vermelhas",
+      "image": "https://example.com/images/cheesecake.jpg"
     }
   ]
 }

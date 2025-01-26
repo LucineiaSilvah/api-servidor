@@ -9,6 +9,7 @@ const linha = fs.readFileSync(caminho);
 const dbJson = JSON.parse(linha.toString());
 
 const users = dbJson.users;
+const products = dbJson.products;
 
 router.get("/", (req, res) => {
   return res.send("hello server");
@@ -16,6 +17,9 @@ router.get("/", (req, res) => {
 
 router.get("/api/users", (req, res) => {
   return res.json(users);
+});
+router.get("/api/products", (req, res) => {
+  return res.json(products);
 });
 
 router.post("/api/users", (req, res) => {
@@ -90,5 +94,59 @@ router.delete("/api/users/:id", (req, res) => {
 
   return res.status(200).json({ message: "Usuário excluído com sucesso.", deletedUser });
 });
+
+/* ===========================
+   Rotas para manipulação de produtos 
+   =========================== */
+
+   router.post("/api/products", (req, res) => {
+    const { name, description, image } = req.body;
+  
+    if (!name || !description || !image) {
+      return res.status(400).json({ error: "Todos os campos são obrigatórios." });
+    }
+  
+    const novoProduto = { id: randomUUID(), name, description, image };
+    products.push(novoProduto);
+    dbJson.products = products;
+  
+    fs.writeFileSync(caminho, JSON.stringify(dbJson, null, 2));
+    return res.status(201).json(novoProduto);
+  });
+  
+  router.put("/api/products/:id", (req, res) => {
+    const { id } = req.params;
+    const { name, description, image } = req.body;
+  
+    if (!name || !description || !image) {
+      return res.status(400).json({ error: "Todos os campos são obrigatórios." });
+    }
+  
+    const productIndex = products.findIndex((product) => product.id === id);
+    if (productIndex === -1) {
+      return res.status(404).json({ error: "Produto não encontrado." });
+    }
+  
+    products[productIndex] = { id, name, description, image };
+    dbJson.products = products;
+  
+    fs.writeFileSync(caminho, JSON.stringify(dbJson, null, 2));
+    return res.status(200).json(products[productIndex]);
+  });
+  
+  router.delete("/api/products/:id", (req, res) => {
+    const { id } = req.params;
+  
+    const productIndex = products.findIndex((product) => product.id === id);
+    if (productIndex === -1) {
+      return res.status(404).json({ error: "Produto não encontrado." });
+    }
+  
+    const deletedProduct = products.splice(productIndex, 1)[0];
+    dbJson.products = products;
+  
+    fs.writeFileSync(caminho, JSON.stringify(dbJson, null, 2));
+    return res.status(200).json({ message: "Produto excluído com sucesso.", deletedProduct });
+  });
 
 export default router;
